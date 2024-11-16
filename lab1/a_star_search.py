@@ -9,8 +9,10 @@ class Graph:
     def add_edge(self, start, end, distance):
         if start not in self.nodes:
             self.nodes[start] = []
+
         if end not in self.nodes:
             self.nodes[end] = []
+
         self.nodes[start].append((end, distance))
         self.nodes[end].append((start, distance))
 
@@ -26,16 +28,19 @@ class Graph:
 
 def create_graph(filename):
     graph = Graph()
+
     with open(filename, "r") as file:
         for line in file:
             parts = line.split()
             node = parts[0]
             h = int(parts[1])
             graph.set_heuristic(node, h)
+
             for i in range(2, len(parts), 2):
                 neighbor = parts[i]
                 distance = int(parts[i + 1])
                 graph.add_edge(node, neighbor, distance)
+
     return graph
 
 
